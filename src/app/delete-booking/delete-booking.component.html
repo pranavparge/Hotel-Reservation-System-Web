@@ -1,0 +1,28 @@
+<app-staff-sidebar></app-staff-sidebar>
+<div class="delete-booking-container">
+    <h2>Delete Booking</h2>
+  
+    <!-- Input Field and Button -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Booking ID</mat-label>
+      <input matInput [(ngModel)]="bookingID" type="text" placeholder="Enter Booking ID" required />
+    </mat-form-field>
+    <button style="margin-left: 10px;
+    height: 56px;
+    margin-top: -2px;" mat-raised-button color="warn" (click)="onDeleteBooking()" [disabled]="isLoading">
+      Delete Booking
+    </button>
+  
+    <!-- Error Message -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  
+    <!-- Loading Spinner -->
+    <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" color="warn"></mat-progress-spinner>
+  
+    <!-- Success Message -->
+    <mat-card *ngIf="successMessage" class="success-card">
+      <mat-card-header>
+        <mat-card-title>{{ successMessage }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  </div>

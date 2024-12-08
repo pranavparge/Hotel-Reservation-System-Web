@@ -1,0 +1,93 @@
+<app-staff-sidebar></app-staff-sidebar>
+<div class="update-booking-container">
+    <h2>Update Booking</h2>
+    
+    <!-- Booking ID Input -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Booking ID</mat-label>
+      <input matInput [(ngModel)]="bookingID" type="text" placeholder="Enter Booking ID" required />
+    </mat-form-field>
+  
+    <!-- Start Date -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Start Date</mat-label>
+      <input matInput type="date" [(ngModel)]="bookingData.startDate" name="startDate" required />
+    </mat-form-field>
+  
+    <!-- End Date -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>End Date</mat-label>
+      <input matInput type="date" [(ngModel)]="bookingData.endDate" name="endDate" required />
+    </mat-form-field>
+  
+    <!-- Total Number of Guests -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Total Number of Guests</mat-label>
+      <input matInput type="number" [(ngModel)]="bookingData.totalNumberOfGuests" name="totalGuests" required />
+    </mat-form-field>
+  
+    <!-- Room Type -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Room Type</mat-label>
+      <mat-select [(ngModel)]="bookingData.roomTypeToQuantity.SINGLE" name="roomType" required>
+        <mat-option *ngFor="let type of roomTypes" [value]="type">{{ type }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- Room Quantity -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Room Quantity</mat-label>
+      <input matInput type="number" [(ngModel)]="bookingData.roomTypeToQuantity.SINGLE" name="quantity" required />
+    </mat-form-field>
+  
+    <!-- Additional Services -->
+    <div class="additional-services">
+      <label>
+        <input type="checkbox" [(ngModel)]="bookingData.additionalServices" name="addBreakfast" value="Breakfast" /> Breakfast
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="bookingData.additionalServices" name="addLunch" value="Lunch" /> Lunch
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="bookingData.additionalServices" name="addDinner" value="Dinner" /> Dinner
+      </label>
+    </div>
+  
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" (click)="onUpdateBooking()" [disabled]="isLoading">
+      Update Booking
+    </button>
+  
+    <!-- Error Message -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  
+    <!-- Loading Spinner -->
+    <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-spinner>
+  
+    <!-- Updated Booking Details -->
+    <mat-card *ngIf="updatedBooking" class="booking-details">
+      <mat-card-header>
+        <mat-card-title>Booking ID: {{ updatedBooking.bookingID }}</mat-card-title>
+        <mat-card-subtitle>Customer ID: {{ updatedBooking.customerID }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Start Date:</strong> {{ updatedBooking.startDate | date }}</p>
+        <p><strong>End Date:</strong> {{ updatedBooking.endDate | date }}</p>
+        <p><strong>Total Guests:</strong> {{ updatedBooking.totalNumberOfGuests }}</p>
+        <p><strong>Total Price:</strong> ${{ updatedBooking.totalPrice }}</p>
+        <p><strong>Additional Services:</strong></p>
+        <ul>
+          <li *ngFor="let service of updatedBooking.additionalServices">{{ service }}</li>
+        </ul>
+        <p><strong>Total Rooms:</strong></p>
+        <ul>
+          <li *ngFor="let room of updatedBooking.totalRooms">
+            Room Number: {{ room.roomNumber }} - {{ room.roomType }} - Capacity: {{ room.roomCapacity }} - Price: ${{ room.roomPrice }}
+          </li>
+        </ul>
+      </mat-card-content>
+      <mat-card-footer>
+        <p><strong>Timestamp:</strong> {{ updatedBooking.timeStamp | date:'short' }}</p>
+      </mat-card-footer>
+    </mat-card>
+  </div>

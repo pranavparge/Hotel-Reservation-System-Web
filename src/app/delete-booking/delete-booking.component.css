@@ -1,0 +1,22 @@
+.delete-booking-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .full-width {
+    margin-bottom: 15px;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .success-card {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #e8f5e9; /* Light green background for success */
+    color: #2e7d32; /* Dark green text for success */
+  }

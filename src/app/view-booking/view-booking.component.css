@@ -1,0 +1,26 @@
+.view-booking-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .full-width {
+    flex: 1;
+  }
+  
+  .booking-card {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }

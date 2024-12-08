@@ -1,0 +1,28 @@
+.rooms-container {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    margin-left: 300px;
+  }
+  
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .room-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-rooms {
+    text-align: center;
+    color: #555;
+  }
+  
+  .loading-spinner {
+    display: block;
+    margin: 50px auto;
+  }

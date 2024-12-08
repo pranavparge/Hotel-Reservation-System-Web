@@ -1,0 +1,45 @@
+<app-staff-sidebar></app-staff-sidebar>
+<div class="view-booking-container">
+    <h2>View Booking Details</h2>
+    
+    <!-- Input Field and Button -->
+    <div class="input-container">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Booking ID</mat-label>
+        <input matInput [(ngModel)]="bookingId" type="text" placeholder="Enter Booking ID" />
+      </mat-form-field>
+      <button style="height: 56px;" mat-raised-button color="primary" (click)="fetchBookingDetails()" [disabled]="isLoading">
+        View Booking
+      </button>
+    </div>
+  
+    <!-- Error Message -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  
+    <!-- Loading Spinner -->
+    <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-spinner>
+  
+    <!-- Booking Details Card -->
+    <mat-card *ngIf="bookingDetails" class="booking-card">
+      <mat-card-header>
+        <mat-card-title>Booking ID: {{ bookingDetails.bookingId }}</mat-card-title>
+        <mat-card-subtitle>Customer ID: {{ bookingDetails.customerId }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Start Date:</strong> {{ bookingDetails.startDate | date }}</p>
+        <p><strong>End Date:</strong> {{ bookingDetails.endDate | date }}</p>
+        <p><strong>Total Guests:</strong> {{ bookingDetails.totalNumberOfGuests }}</p>
+        <p><strong>Total Price:</strong> ${{ bookingDetails.totalPrice }}</p>
+        <p><strong>Additional Services:</strong></p>
+        <ul>
+          <li *ngFor="let service of bookingDetails.additionalServices">{{ service }}</li>
+        </ul>
+        <p><strong>Total Rooms:</strong></p>
+        <ul>
+          <li *ngFor="let room of bookingDetails.totalRooms">
+            Room Number: {{ room.roomNumber }} - {{ room.roomType }} - Capacity: {{ room.roomCapacity }} - Price: ${{ room.roomPrice }}
+          </li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>

@@ -1,0 +1,30 @@
+<app-sidebar></app-sidebar>
+
+<div class="rooms-container">
+    <h1>Available Rooms</h1>
+  
+    <mat-progress-spinner
+      *ngIf="isLoading"
+      mode="indeterminate"
+      color="primary"
+      class="loading-spinner"
+    ></mat-progress-spinner>
+  
+    <div *ngIf="!isLoading && rooms.length === 0" class="no-rooms">
+      <p>No rooms available at the moment.</p>
+    </div>
+  
+    <div *ngIf="!isLoading && rooms.length > 0" class="rooms-grid">
+      <mat-card *ngFor="let room of rooms" class="room-card">
+        <mat-card-header>
+          <mat-card-title>Room {{ room.roomNumber }}</mat-card-title>
+          <mat-card-subtitle>{{ room.roomType }} Room</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Capacity:</strong> {{ room.roomCapacity }} Person(s)</p>
+          <p><strong>Price:</strong> ${{ room.roomPrice }} / Night</p>
+          <p><strong>Status:</strong> {{ room.roomStatus }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

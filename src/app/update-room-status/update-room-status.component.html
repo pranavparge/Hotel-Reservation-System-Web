@@ -1,0 +1,38 @@
+<app-staff-sidebar></app-staff-sidebar>
+<div class="update-room-status-container">
+    <h2>Update Room Status</h2>
+  
+    <!-- Room Number Input -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Room Number</mat-label>
+      <input matInput [(ngModel)]="roomData.roomNumber" type="text" placeholder="Enter Room Number" required />
+    </mat-form-field>
+  
+    <!-- Room Status Dropdown -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Room Status</mat-label>
+      <mat-select [(ngModel)]="roomData.roomStatus" required>
+        <mat-option *ngFor="let status of roomStatuses" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" (click)="onUpdateRoomStatus()" [disabled]="isLoading">
+      Update Room Status
+    </button>
+  
+    <!-- Error Message -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  
+    <!-- Loading Spinner -->
+    <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-spinner>
+  
+    <!-- Success Message -->
+    <mat-card *ngIf="successMessage" class="success-card">
+      <mat-card-header>
+        <mat-card-title>{{ successMessage }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  </div>
