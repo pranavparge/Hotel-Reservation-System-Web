@@ -1,0 +1,52 @@
+<app-staff-sidebar></app-staff-sidebar>
+<div class="create-room-container">
+    <h2>Create a New Room</h2>
+    <form>
+      <!-- Room Number -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Room Number</mat-label>
+        <input matInput type="text" [(ngModel)]="roomData.roomNumber" name="roomNumber" required />
+      </mat-form-field>
+  
+      <!-- Room Capacity -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Room Capacity</mat-label>
+        <input matInput type="number" [(ngModel)]="roomData.roomCapacity" name="roomCapacity" required />
+      </mat-form-field>
+  
+      <!-- Room Type -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Room Type</mat-label>
+        <mat-select [(ngModel)]="roomData.roomType" name="roomType" required>
+          <mat-option *ngFor="let type of roomTypes" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <!-- Room Status (Disabled) -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Room Status</mat-label>
+        <input matInput type="text" [(ngModel)]="roomData.roomStatus" name="roomStatus" disabled />
+      </mat-form-field>
+  
+      <!-- Submit Button -->
+      <button
+        mat-raised-button
+        color="primary"
+        style="width: 100%;"
+        (click)="onCreateRoom()"
+        [disabled]="isLoading"
+      >
+        Create Room
+      </button>
+  
+      <!-- Loading Spinner -->
+      <mat-progress-spinner
+        *ngIf="isLoading"
+        mode="indeterminate"
+        color="primary"
+        class="loading-spinner"
+      ></mat-progress-spinner>
+    </form>
+  </div>
