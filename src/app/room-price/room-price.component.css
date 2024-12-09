@@ -1,0 +1,33 @@
+.room-price-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-field {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  button {
+    height: 56px; /* Align button with the date picker */
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .room-prices-card {
+    margin-top: 20px;
+    text-align: left;
+  }

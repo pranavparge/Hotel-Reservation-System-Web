@@ -1,0 +1,33 @@
+<app-sidebar></app-sidebar>
+<div class="room-price-container">
+    <h2>Get Room Prices</h2>
+  
+    <!-- Date Picker -->
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Select Date</mat-label>
+        <input matInput [(ngModel)]="startDate" type="date" required />
+      </mat-form-field>
+      <button style="    margin-top: -22px;" mat-raised-button color="primary" (click)="getRoomPrices()" [disabled]="isLoading">
+        Get Room Price
+      </button>
+    </div>
+  
+    <!-- Loading Spinner -->
+    <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-spinner>
+  
+    <!-- Error Message -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  
+    <!-- Room Prices Card -->
+    <mat-card *ngIf="roomPrices" class="room-prices-card">
+      <mat-card-header>
+        <mat-card-title>Room Prices for {{ startDate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Single Room:</strong> ${{ roomPrices.singleRoomPrice }}</p>
+        <p><strong>Double Room:</strong> ${{ roomPrices.doubleRoomPrice }}</p>
+        <p><strong>Suite:</strong> ${{ roomPrices.suiteRoomPrice }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>

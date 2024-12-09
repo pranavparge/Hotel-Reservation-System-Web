@@ -15,6 +15,7 @@ import { CreateBookingComponent } from './create-booking/create-booking.componen
 import { UpdateBookingComponent } from './update-booking/update-booking.component';
 import { DeleteBookingComponent } from './delete-booking/delete-booking.component';
 import { UpdateRoomStatusComponent } from './update-room-status/update-room-status.component';
+import { RoomPriceComponent } from './room-price/room-price.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'staff-login', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'cust-logout', component: CustLogoutComponent },
   { path: 'about-cust', component: AboutCustComponent },
   { path: 'cust-register', component: CustRegisterComponent },
+  { path: 'room-price', component: RoomPriceComponent },
   { path: 'staff-login', component: StaffLoginComponent },
   { path: 'staff-register', component: StaffRegisterComponent },
   { path: 'create-room', component: CreateRoomComponent },

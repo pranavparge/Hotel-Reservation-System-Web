@@ -31,6 +31,7 @@ import { CreateBookingComponent } from './create-booking/create-booking.componen
 import { UpdateBookingComponent } from './update-booking/update-booking.component';
 import { DeleteBookingComponent } from './delete-booking/delete-booking.component';
 import { UpdateRoomStatusComponent } from './update-room-status/update-room-status.component';
+import { RoomPriceComponent } from './room-price/room-price.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { UpdateRoomStatusComponent } from './update-room-status/update-room-stat
     CreateBookingComponent,
     UpdateBookingComponent,
     DeleteBookingComponent,
-    UpdateRoomStatusComponent
+    UpdateRoomStatusComponent,
+    RoomPriceComponent
   ],
   imports: [
     BrowserModule,
