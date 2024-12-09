@@ -36,7 +36,7 @@ export class CustLoginComponent {
         localStorage.setItem('programType', response.programType);
 
         // Navigate to the book-room component
-        this.router.navigate(['/cust-view-rooms']);
+        this.router.navigate(['/create-booking']);
       },
       error: (error) => {
         console.error('Login error:', error);
