@@ -41,19 +41,32 @@ export class UpdateRoomStatusComponent {
     const payload = { status: this.roomData.roomStatus }; // Correct payload
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`); // Add Authorization header
   
-    this.http.post(url, payload, { headers }).subscribe({
-      next: () => {
+    this.http.post(url, payload, { headers, responseType: 'text' }).subscribe({
+      next: (response: any) => {
+        // Handle an empty response or parse JSON if needed
+        if (response) {
+          try {
+            const jsonResponse = JSON.parse(response); // If backend sends JSON as a string
+            if (jsonResponse.success) {
+              this.successMessage = jsonResponse.message;
+              this.errorMessage = '';
+            } else {
+              this.errorMessage = jsonResponse.message || 'Failed to update room status.';
+            }
+          } catch {
+            this.successMessage = 'Room status updated successfully!';
+            this.errorMessage = '';
+          }
+        } else {
+          this.successMessage = 'Room status updated successfully!';
+          this.errorMessage = '';
+        }
         this.isLoading = false;
-        this.successMessage = `Room Number ${this.roomData.roomNumber} status updated to ${this.roomData.roomStatus} successfully!`;
-        this.errorMessage = ''; // Clear any previous error message
-        this.roomData.roomNumber = ''; // Reset the input field
-        this.roomData.roomStatus = 'Available'; // Reset the dropdown to default
       },
       error: (error) => {
+        this.errorMessage = `Error: ${error.message}`;
+        console.error('Error:', error);
         this.isLoading = false;
-        this.errorMessage = 'Failed to update room status. Please try again.';
-        this.successMessage = ''; // Clear any previous success message
-        console.error('Error updating room status:', error);
       }
     });
   }

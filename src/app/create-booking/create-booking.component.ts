@@ -43,21 +43,38 @@ export class CreateBookingComponent {
       this.errorMessage = 'Please fill all required fields.';
       return;
     }
-
+  
     this.isLoading = true;
     this.errorMessage = '';
     const url = 'http://localhost:8080/customer/bookings/create';
-
-    this.http.post(url, this.bookingData).subscribe({
+  
+    const jwtToken = localStorage.getItem('jwt'); // Retrieve JWT token
+    if (!jwtToken) {
+      this.errorMessage = 'Unauthorized: Please log in first.';
+      this.isLoading = false;
+      return;
+    }
+  
+    const headers = {
+      Authorization: `Bearer ${jwtToken}`
+    };
+  
+    this.http.post(url, this.bookingData, { headers }).subscribe({
       next: (response: any) => {
         this.isLoading = false;
         this.responseMessage = response;
         alert('Booking created successfully!');
       },
       error: (error) => {
+        console.error('API Error:', error);
         this.isLoading = false;
-        this.errorMessage = 'Failed to create booking. Please try again.';
-        console.error('Error:', error);
+        // Display the error message from the API response
+        if (error.error && error.error.message) {
+          this.errorMessage = error.error.message;
+          alert(this.errorMessage);
+        } else {
+          this.errorMessage = 'Failed to create booking. Please try again.';
+        }
       }
     });
   }

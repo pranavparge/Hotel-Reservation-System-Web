@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-view-booking',
@@ -19,18 +19,35 @@ export class ViewBookingComponent {
       this.errorMessage = 'Please enter a valid booking ID.';
       return;
     }
-
+  
     this.isLoading = true;
     this.errorMessage = '';
-
-    this.http.get(`http://localhost:8080/staff/bookings?bookingID=${this.bookingId}`).subscribe({
+  
+    // Retrieve JWT (adjust as per your storage mechanism, e.g., localStorage or sessionStorage)
+    const token = localStorage.getItem('jwt'); 
+  
+    if (!token) {
+      this.isLoading = false;
+      this.errorMessage = 'User is not authenticated. Please log in.';
+      return;
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  
+    this.http.get(`http://localhost:8080/staff/bookings?bookingID=${this.bookingId}`, { headers }).subscribe({
       next: (response: any) => {
         this.bookingDetails = response;
         this.isLoading = false;
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage = 'Failed to fetch booking details. Please try again.';
+        if (error.status === 403) {
+          this.errorMessage = 'You do not have permission to access this resource.';
+        } else {
+          this.errorMessage = 'Failed to fetch booking details. Please try again.';
+        }
         console.error('Error fetching booking details:', error);
       }
     });

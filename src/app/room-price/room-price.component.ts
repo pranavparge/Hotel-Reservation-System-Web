@@ -11,8 +11,31 @@ export class RoomPriceComponent {
   roomPrices: any = null; // To store the response prices
   errorMessage: string = ''; // To handle errors
   isLoading: boolean = false; // For loading spinner
+  fixedRoomPrices = {
+    singleRoomPrice: 100.0,
+    doubleRoomPrice: 150.0,
+    suiteRoomPrice: 200.0
+  };
 
   constructor(private http: HttpClient) {}
+
+  getRoomPrice(): void {
+    if (!this.startDate) {
+      this.errorMessage = 'Please select a valid date.';
+      this.roomPrices = null; // Clear previous prices
+      return;
+    }
+
+    this.isLoading = true; // Simulate loading state
+    this.errorMessage = '';
+
+    // Simulating a slight delay to mimic fetching data
+    setTimeout(() => {
+      this.isLoading = false;
+      this.roomPrices = this.fixedRoomPrices; // Use hardcoded prices
+      this.errorMessage = ''; // Clear errors
+    }, 1000); // 1 second delay for better user experience
+  }
 
   getRoomPrices(): void {
     if (!this.startDate) {
