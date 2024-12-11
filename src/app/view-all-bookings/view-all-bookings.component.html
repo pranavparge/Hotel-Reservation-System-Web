@@ -1,0 +1,39 @@
+<app-staff-sidebar></app-staff-sidebar>
+<div class="view-bookings-container">
+  <h2>Current Bookings</h2>
+
+  <!-- Loading Spinner -->
+  <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" color="primary"></mat-progress-spinner>
+
+  <!-- Error Message -->
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  <!-- Bookings Cards -->
+  <div class="bookings-grid" *ngIf="!isLoading && bookings.length > 0">
+    <mat-card *ngFor="let booking of bookings" class="booking-card">
+      <mat-card-header>
+        <mat-card-title>Booking ID: {{ booking.bookingId }}</mat-card-title>
+        <mat-card-subtitle>Customer ID: {{ booking.customerId }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Total Price:</strong> ${{ booking.totalPrice }}</p>
+        <p><strong>Start Date:</strong> {{ booking.startDate | date }}</p>
+        <p><strong>End Date:</strong> {{ booking.endDate | date }}</p>
+        <p><strong>Total Guests:</strong> {{ booking.totalNumberOfGuests }}</p>
+        <p><strong>Additional Services:</strong> {{ booking.additionalServices.join(', ') }}</p>
+        <p><strong>Rooms:</strong></p>
+        <ul>
+          <li *ngFor="let room of booking.totalRooms">
+            Room Number: {{ room.roomNumber }}, Type: {{ room.roomType }}, Price: ${{ room.roomPrice }}
+          </li>
+        </ul>
+      </mat-card-content>
+      <mat-card-footer>
+        <p><strong>Timestamp:</strong> {{ booking.timeStamp | date:'medium' }}</p>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+
+  <!-- No Bookings Found -->
+  <p *ngIf="!isLoading && bookings.length === 0" class="no-bookings">No bookings found.</p>
+</div>

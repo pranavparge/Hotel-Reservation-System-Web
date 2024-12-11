@@ -34,7 +34,7 @@ export class CustLoginComponent {
         localStorage.setItem('jwt', response.jwt);
         localStorage.setItem('customerId', response.customerId);
         localStorage.setItem('programType', response.programType);
-
+        localStorage.setItem('email', response.email);
         // Navigate to the book-room component
         this.router.navigate(['/create-booking']);
       },
