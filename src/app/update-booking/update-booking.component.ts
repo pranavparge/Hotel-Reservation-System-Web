@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-booking',
@@ -27,11 +27,24 @@ export class UpdateBookingComponent {
       this.errorMessage = 'Please enter a valid Booking ID.';
       return;
     }
-
+  
     this.isLoading = true;
     this.errorMessage = '';
-
-    this.http.put(`http://localhost:8080/staff/bookings/update?bookingID=${this.bookingID}`, this.bookingData).subscribe({
+  
+    // Retrieve JWT (adjust based on how your token is stored, e.g., localStorage or sessionStorage)
+    const token = localStorage.getItem('jwt');
+  
+    if (!token) {
+      this.isLoading = false;
+      this.errorMessage = 'User is not authenticated. Please log in.';
+      return;
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  
+    this.http.put(`http://localhost:8080/staff/bookings/update?bookingID=${this.bookingID}`, this.bookingData, { headers }).subscribe({
       next: (response: any) => {
         this.isLoading = false;
         this.updatedBooking = response;
@@ -39,7 +52,11 @@ export class UpdateBookingComponent {
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage = 'Failed to update booking. Please try again.';
+        if (error.status === 403) {
+          this.errorMessage = 'You do not have permission to update this booking.';
+        } else {
+          this.errorMessage = 'Failed to update booking. Please try again.';
+        }
         console.error('Error updating booking:', error);
       }
     });
