@@ -1,0 +1,30 @@
+.view-bookings-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    margin-left: 310px;
+  }
+  
+  .bookings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .booking-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .no-bookings {
+    color: gray;
+    text-align: center;
+    margin-top: 20px;
+  }

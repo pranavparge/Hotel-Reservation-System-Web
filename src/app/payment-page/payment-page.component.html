@@ -1,0 +1,70 @@
+<app-sidebar></app-sidebar>
+<div class="payment-container">
+    <h2>Make a Payment</h2>
+  
+    <!-- Booking ID -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Booking ID</mat-label>
+      <input matInput [(ngModel)]="paymentData.bookingId" type="text" required />
+    </mat-form-field>
+  
+    <!-- Amount -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Amount</mat-label>
+      <input matInput [(ngModel)]="paymentData.amount" type="number" required />
+    </mat-form-field>
+  
+    <!-- Customer Email -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Customer Email</mat-label>
+      <input matInput [value]="paymentData.customerEmail" type="text" readonly />
+    </mat-form-field>
+  
+    <!-- Payment Method -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Payment Method</mat-label>
+      <mat-select [(ngModel)]="paymentData.paymentMethod">
+        <mat-option value="Paypal">Paypal</mat-option>
+        <mat-option value="Card">Card Payment</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <!-- PayPal ID -->
+    <div *ngIf="paymentData.paymentMethod === 'Paypal'" class="paypal-section">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>PayPal ID</mat-label>
+        <input matInput [(ngModel)]="paymentData.details.paypalID" type="text" />
+      </mat-form-field>
+    </div>
+  
+    <!-- Card Details -->
+    <div *ngIf="paymentData.paymentMethod === 'Card'" class="card-section">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Card Number</mat-label>
+        <input matInput [(ngModel)]="paymentData.details.cardNumber" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Card Name</mat-label>
+        <input matInput [(ngModel)]="paymentData.details.cardName" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>CVV</mat-label>
+        <input matInput [(ngModel)]="paymentData.details.cvv" type="password" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Expiry</mat-label>
+        <input matInput [(ngModel)]="paymentData.details.expiry" type="text" />
+      </mat-form-field>
+    </div>
+  
+    <!-- Error Message -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  
+    <!-- Success Message -->
+    <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+  
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="isLoading">
+      Submit Payment
+    </button>
+  </div>

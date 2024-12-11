@@ -16,6 +16,8 @@ import { UpdateBookingComponent } from './update-booking/update-booking.componen
 import { DeleteBookingComponent } from './delete-booking/delete-booking.component';
 import { UpdateRoomStatusComponent } from './update-room-status/update-room-status.component';
 import { RoomPriceComponent } from './room-price/room-price.component';
+import { PaymentPageComponent } from './payment-page/payment-page.component';
+import { ViewAllBookingsComponent } from './view-all-bookings/view-all-bookings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'staff-login', pathMatch: 'full' },
@@ -31,10 +33,12 @@ const routes: Routes = [
   { path: 'create-room', component: CreateRoomComponent },
   { path: 'about-staff', component: AboutStaffComponent },
   { path: 'staff-logout', component: StaffLogoutComponent },
+  { path: 'view-all-bookings', component: ViewAllBookingsComponent },
   { path: 'view-booking', component: ViewBookingComponent },
   { path: 'update-booking', component: UpdateBookingComponent },
   { path: 'delete-booking', component: DeleteBookingComponent },
   { path: 'update-room-status', component: UpdateRoomStatusComponent },
+  { path: 'payment-page', component: PaymentPageComponent },
 ];
 
 @NgModule({
